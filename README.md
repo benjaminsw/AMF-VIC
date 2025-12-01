@@ -137,9 +137,7 @@ For detailed documentation:
 | `realnvp` | ✅ | General purpose, stable |
 | `maf` | ✅ | Autoregressive modeling |
 | `rbig` | ❌ | Non-parametric, rotation-based |
-| `iaf` | ✅ | Efficient sampling |
-| `gaussianization` | ✅ | Marginal gaussianization |
-| `naf`, `glow`, `nice`, `spline`, `tan` | ✅ | Specialized architectures |
+
 
 ## 🎨 Visualization Examples
 
