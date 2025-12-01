@@ -10,13 +10,12 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 from amf_vi.flows.realnvp import RealNVPFlow
 from amf_vi.flows.maf import MAFFlow
-from amf_vi.flows.iaf import IAFFlow
-from amf_vi.flows.gaussianization import GaussianizationFlow
+#from amf_vi.flows.iaf import IAFFlow
+#from amf_vi.flows.gaussianization import GaussianizationFlow
 #from amf_vi.flows.naf import NAFFlowSimplified
-from amf_vi.flows.naf import NAFFlow 
-from amf_vi.flows.glow import GlowFlow
-from amf_vi.flows.nice import NICEFlow
-from amf_vi.flows.tan import TANFlow
+#from amf_vi.flows.glow import GlowFlow
+#from amf_vi.flows.nice import NICEFlow
+#from amf_vi.flows.tan import TANFlow
 from amf_vi.flows.rbig import RBIGFlow
 from data.data_generator import generate_data
 import numpy as np
@@ -202,7 +201,8 @@ class SequentialAMFVI(nn.Module):
                     flow_log_probs.append(safe_log_prob)  # Use safe extraction
             
             # Convert to likelihoods and normalize (softmax)
-            flow_log_probs_tensor = torch.tensor(flow_log_probs)
+            # flow_log_probs_tensor = torch.tensor(flow_log_probs)
+            flow_log_probs_tensor = torch.tensor(flow_log_probs, device=data.device)
             normalized_likelihoods = F.softmax(flow_log_probs_tensor, dim=0)
             
             # Moving average update: weight_i = α * old_weight_i + (1-α) * normalized_likelihood_i
@@ -343,13 +343,13 @@ def train_sequential_amf_vi(dataset_name='multimodal', flow_types=None, show_plo
     model = SequentialAMFVI(dim=2, flow_types=flow_types, weight_update_method='moving_average')
     model.dataset_name = dataset_name  # Set dataset name for fresh data generation
     model = model.to(device)
-    train_epochs = 5000
+    train_epochs = 10000
     
     # Stage 1: Train flows independently
-    flow_losses = model.train_flows_independently(data, epochs=train_epochs, lr=5e-5)
+    flow_losses = model.train_flows_independently(data, epochs=train_epochs, lr=1e-3)
     
     # Stage 2: Learn mixture weights using moving average
-    weight_losses = model.train_mixture_weights_moving_average(data, epochs=train_epochs/10)
+    weight_losses = model.train_mixture_weights_moving_average(data, epochs=train_epochs)
     
     # Evaluation and visualization
     print("\n🎨 Generating visualizations...")
