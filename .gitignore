@@ -1,0 +1,16 @@
+# Python stuff
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+AMFVENV/
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Other common junk
+*.log

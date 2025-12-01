@@ -1,0 +1,26 @@
+FLOW COMPONENT DIAGNOSTIC REPORT
+================================================================================
+
+Model: EM Mixture of Flows (Two Moons)
+Components: 3
+Mixture weights: [0.04987419 0.44905517 0.5010707 ]
+
+OUTLIER ANALYSIS:
+
+Component 0:
+  Weight: 0.0499
+  Outlier percentage: 8.35%
+  Max absolute value: 113845.73
+
+Component 1:
+  Weight: 0.4491
+  Outlier percentage: 0.00%
+  Max absolute value: 56.70
+
+Component 2:
+  Weight: 0.5011
+  Outlier percentage: 3.80%
+  Max absolute value: 133659.20
+
+
+PROBLEMATIC COMPONENTS: [0, 2]
