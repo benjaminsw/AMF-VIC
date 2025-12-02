@@ -236,11 +236,11 @@ This project is licensed under the MIT License.
 If you use this code in your research:
 
 ```bibtex
-@software{amfvi2024,
+@software{amfvi2025,
   title={AMF-VI: Adaptive Mixture of Flows for Variational Inference},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/yourusername/amf-vi}
+  author={Benjamin Wiriyapong},
+  year={2025},
+  url={https://github.com/benjaminsw/amf-vi}
 }
 ```
 
