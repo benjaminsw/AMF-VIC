@@ -64,7 +64,25 @@ def create_bimodal_different_base(n_samples=1000, separation=6, noise=0.2):
         data += np.random.normal(0, noise, data.shape)
     return torch.tensor(data, dtype=torch.float32)
 
+def create_multimodal_gaussian_mixture5(n_samples=1000, n_modes=5, noise=0.1):
+    """Multimodal Gaussian mixture"""
+    modes = [(-0.5, -1.0), (0.5, 1.0), (2.0, 2.5), (0.5, -1.0), (-0.5, 1.0)][:n_modes]
+    samples_per_mode = n_samples // len(modes)
+    mode_var = [0.7, 0.3, 1, 0.7, 0.3]
+    all_samples = []
+    count = 0
+    for mode in modes:
+        samples = np.random.multivariate_normal(mode, mode_var[count] * np.eye(2), samples_per_mode)
+        all_samples.append(samples)
+        count += 1
 
+    data = np.vstack(all_samples)
+    np.random.shuffle(data)
+    if noise > 0:
+        data += np.random.normal(0, noise, data.shape)
+    return torch.tensor(data, dtype=torch.float32)
+
+'''
 def create_multimodal_gaussian_mixture(n_samples=1000, n_modes=3, noise=0.1):
     """Multimodal Gaussian mixture"""
     modes = [(-2.0, -1.0), (2.0, 1.0), (0.0, 2.5)][:n_modes]
@@ -80,6 +98,7 @@ def create_multimodal_gaussian_mixture(n_samples=1000, n_modes=3, noise=0.1):
     if noise > 0:
         data += np.random.normal(0, noise, data.shape)
     return torch.tensor(data, dtype=torch.float32)
+'''
 
 
 def create_two_moons_data(n_samples=1000, noise=0.1):
@@ -113,7 +132,7 @@ DATA_GENERATORS = {
     'x_shape': create_x_shape_data,
     'bimodal_shared': create_bimodal_shared_base,
     'bimodal_different': create_bimodal_different_base,
-    'multimodal': create_multimodal_gaussian_mixture,
+    'multimodal': create_multimodal_gaussian_mixture5,
     'two_moons': create_two_moons_data,
     'rings': create_concentric_rings
 }
