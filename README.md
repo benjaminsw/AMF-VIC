@@ -154,7 +154,7 @@ Row 2: [RealNVP Samples] [MAF Samples] [RBIG Samples]
 
 ```python
 # Use 5 different flow types
-custom_flows = ['realnvp', 'maf', 'rbig', 'gaussianization', 'iaf']
+custom_flows = ['realnvp', 'maf', 'rbig']
 
 model, _, _ = train_sequential_amf_vi(
     dataset_name='two_moons',
